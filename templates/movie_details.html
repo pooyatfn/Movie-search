@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+        .movie-details {
+            display: flex;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .movie-details img {
+            width: 200px;
+            height: auto;
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+        }
+        .movie-details .details {
+            padding: 20px;
+        }
+        .movie-details p {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        .movie-details strong {
+            font-weight: bold;
+            color: #007bff;
+        }
+        .separator {
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 20px;
+        }
+        .back-button {
+            display: block;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+        }
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Movie Details</h1>
+        <a href="/" class="back-button">Back to Movie Search</a>
+        {% for movie_info in movies_result %}
+        <div class="movie-details">
+            <div>
+                <img src="{{ movie_info.Poster_Link }}" alt="Poster">
+            </div>
+            <div class="details">
+                <p><strong>Title:</strong> {{ movie_info.Series_Title }}</p>
+                <p><strong>Released Year:</strong> {{ movie_info.Released_Year }}</p>
+                <p><strong>Certificate:</strong> {{ movie_info.Certificate }}</p>
+                <p><strong>Runtime:</strong> {{ movie_info.Runtime }}</p>
+                <p><strong>Genre:</strong> {{ movie_info.Genre }}</p>
+                <p><strong>IMDB Rating:</strong> {{ movie_info.IMDB_Rating }}</p>
+                <p><strong>Overview:</strong> {{ movie_info.Overview }}</p>
+                <p><strong>Meta Score:</strong> {{ movie_info.Meta_score }}</p>
+                <p><strong>Director:</strong> {{ movie_info.Director }}</p>
+                <p><strong>Stars:</strong> {{ movie_info.Stars }}</p>
+                <p><strong>No of Votes:</strong> {{ movie_info.No_of_Votes }}</p>
+                <p><strong>Gross:</strong> {{ movie_info.Gross }}</p>
+            </div>
+        </div>
+        <div class="separator"></div>
+        {% endfor %}
+    </div>
+</body>
+</html>
