@@ -11,10 +11,12 @@
             margin: 0;
             padding: 20px;
         }
+
         .container {
             max-width: 800px;
             margin: auto;
         }
+
         .movie-details {
             display: flex;
             background-color: #fff;
@@ -22,27 +24,33 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
         }
+
         .movie-details img {
             width: 200px;
             height: auto;
             border-top-left-radius: 5px;
             border-bottom-left-radius: 5px;
         }
+
         .movie-details .details {
             padding: 20px;
         }
+
         .movie-details p {
             margin: 10px 0;
             font-size: 16px;
         }
+
         .movie-details strong {
             font-weight: bold;
             color: #007bff;
         }
+
         .separator {
             border-bottom: 1px solid #ccc;
             margin-bottom: 20px;
         }
+
         .back-button {
             display: block;
             margin-bottom: 20px;
@@ -55,16 +63,17 @@
             text-decoration: none;
             text-align: center;
         }
+
         .back-button:hover {
             background-color: #0056b3;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Movie Details</h1>
-        <a href="/" class="back-button">Back to Movie Search</a>
-        {% for movie_info in movies_result %}
+<div class="container">
+    <h1>Movie Details</h1>
+    <a href="/" class="back-button">Back to Movie Search</a>
+    {% for movie_info in movies_result %}
         <div class="movie-details">
             <div>
                 <img src="{{ movie_info.Poster_Link }}" alt="Poster">
@@ -85,7 +94,7 @@
             </div>
         </div>
         <div class="separator"></div>
-        {% endfor %}
-    </div>
+    {% endfor %}
+</div>
 </body>
 </html>

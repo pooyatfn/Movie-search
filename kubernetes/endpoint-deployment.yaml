@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: endpoint
+  labels:
+    app: endpoint
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: endpoint
+  template:
+    metadata:
+      labels:
+        app: endpoint
+    spec:
+      containers:
+        - name: endpoint
+          image: moviesearch-endpoints
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8000
+          env:
+            - name: ELASTICSEARCH_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: movie-search
+                  key: ELASTICSEARCH_URL
+            - name: ELASTICSEARCH_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: movie-search
+                  key: ELASTICSEARCH_PASS
+            - name: REDIS_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: movie-search
+                  key: REDIS_HOST
+            - name: REDIS_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: movie-search
+                  key: REDIS_PORT
+            - name: REDIS_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: movie-search
+                  key: REDIS_PASS
