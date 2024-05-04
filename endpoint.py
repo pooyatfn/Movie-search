@@ -4,17 +4,18 @@ import redis
 import requests
 import uvicorn
 from elasticsearch import Elasticsearch
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 
+from configs import API_URL, ELASTICSEARCH_URL, ELASTICSEARCH_PASSWORD, ELASTICSEARCH_USER, \
+    REDIS_HOST, REDIS_PASSWORD, REDIS_PORT
+
 app = FastAPI()
 
-redis_client = redis.Redis(host='redis', port=6379, password="SomePass@")
+redis_client = redis.Redis(host=REDIS_HOST, port=int(REDIS_PORT), password=REDIS_PASSWORD)
 
-es = Elasticsearch("http://elasticsearch:9200", http_auth=('elastic', 'SomePass@'), verify_certs=False)
-
-API_URL = "https://imdb146.p.rapidapi.com/v1/find/"
+es = Elasticsearch(ELASTICSEARCH_URL, http_auth=(ELASTICSEARCH_USER, ELASTICSEARCH_PASSWORD), verify_certs=False)
 
 templates = Jinja2Templates(directory="templates")
 

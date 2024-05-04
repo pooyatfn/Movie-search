@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: elasticsearch-deployment
+  labels:
+    app: elasticsearch
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: elasticsearch
+  template:
+    metadata:
+      labels:
+        app: elasticsearch
+    spec:
+      volumes:
+        - name: elasticsearch-data
+          persistentVolumeClaim:
+            claimName: elasticsearch-pvc
+      containers:
+        - name: elasticsearch
+          image: elasticsearch:8.13.0
+          volumeMounts:
+            - mountPath: "/usr/share/elasticsearch-data"
+              name: elasticsearch-data
+          resources:
+            limits:
+              memory: "1024Mi"
+          ports:
+            - containerPort: 9200
+            - containerPort: 9300
+          env:
+            - name: discovery.type
+              valueFrom:
+                configMapKeyRef:
+                  name: movie-search
+                  key: ELASTICSEARCH_CONF
+            - name: ELASTIC_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: movie-search
+                  key: ELASTICSEARCH_PASS
+            - name: xpack.security.enabled
+              valueFrom:
+                configMapKeyRef:
+                  name: movie-search
+                  key: SECURITY

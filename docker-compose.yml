@@ -10,7 +10,6 @@ services:
       - "ELASTIC_PASSWORD=SomePass@"
     ports:
       - "9200:9200"
-      - "9300:9300"
     volumes:
       - ./movies.json:/usr/share/elasticsearch/data/movies.json
     deploy:
@@ -27,10 +26,6 @@ services:
       - elasticsearch
     ports:
       - "5601:5601"
-    environment:
-      - "ELASTICSEARCH_USERNAME=user"
-      - "ELASTICSEARCH_PASSWORD=SomePass@"
-      - "xpack.security.encryptionKey=something_at_least_32_characters"
     deploy:
       resources:
         limits:
@@ -56,7 +51,7 @@ services:
       - elasticsearch
     environment:
       - REDIS_HOST=redis
-      - ELASTICSEARCH_HOST=elasticsearch
+      - ELASTICSEARCH_HOST=http://elasticsearch:9200
       - ELASTICSEARCH_PORT=9200
     ports:
       - "8000:8000"
